@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+//alguns navegadores definem uma largura mínima para alguns elementos,
+//logo, é válido zerar isso no css global
+* {
+  min-width: 0;
+}
