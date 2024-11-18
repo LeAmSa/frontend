@@ -1,5 +1,6 @@
 import { Mail, User, X } from "lucide-react";
 import { FormEvent } from "react";
+import { Modal } from "../../components/modal";
 
 interface ConfirmTripModalProps {
   closeConfirmTripModal: () => void;
@@ -11,8 +12,8 @@ export function ConfirmTripModal({
   onCreateTrip,
 }: ConfirmTripModalProps) {
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
-      <div className="w-[640px] rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5">
+    <Modal.Root onClose={closeConfirmTripModal}>
+      <Modal.Content>
         <div className="space-y-2">
           <div className="flex justify-between">
             <h2 className="text-lg font-semibold">
@@ -60,7 +61,7 @@ export function ConfirmTripModal({
             Confirmar criação da viagem
           </button>
         </form>
-      </div>
-    </div>
+      </Modal.Content>
+    </Modal.Root>
   );
 }
