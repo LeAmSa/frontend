@@ -19,18 +19,11 @@ export function InviteGuestsModal({
   return (
     <Modal.Root onClose={closeGuestsModal}>
       <Modal.Content>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <h2 className="text-lg font-semibold">Selecionar convidados</h2>
-            <button type="button" onClick={closeGuestsModal}>
-              <X className="size-5 text-zinc-400" />
-            </button>
-          </div>
-          <p className="text-sm text-zinc-400">
-            Os convidados irão receber e-mails para confirmar a participação na
-            viagem.
-          </p>
-        </div>
+        <Modal.Title text="Selecionar convidados" />
+        <p className="text-sm text-zinc-400">
+          Os convidados irão receber e-mails para confirmar a participação na
+          viagem.
+        </p>
 
         <div className="flex flex-wrap gap-2">
           {emailsToInvite.map((email, index) => (

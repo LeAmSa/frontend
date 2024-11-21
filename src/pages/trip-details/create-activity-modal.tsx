@@ -1,4 +1,4 @@
-import { Calendar, Tag, X } from "lucide-react";
+import { Calendar, Tag } from "lucide-react";
 import { Modal } from "../../components/modal";
 import { Button } from "../../components/button";
 
@@ -12,17 +12,10 @@ export function CreateActivityModal({
   return (
     <Modal.Root onClose={closeCreateActivityModal}>
       <Modal.Content>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <h2 className="text-lg font-semibold">Cadastrar atividade</h2>
-            <button type="button" onClick={closeCreateActivityModal}>
-              <X className="size-5 text-zinc-400" />
-            </button>
-          </div>
-          <p className="text-zinc-400">
-            Todos os convidados podem visualizar as atividades.
-          </p>
-        </div>
+        <Modal.Title text="Cadastrar atividade" />
+        <p className="text-zinc-400">
+          Todos os convidados podem visualizar as atividades.
+        </p>
 
         <form className="space-y-3">
           <div className="h-14 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
