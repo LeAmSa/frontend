@@ -11,3 +11,8 @@
 input {
   color-scheme: dark;
 }
+
+.rdp-root {
+  --rdp-accent-color: #bef264;
+  --rdp-accent-background-color: #bef264;
+}
