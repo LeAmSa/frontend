@@ -1,6 +1,10 @@
 import { Calendar, Tag } from "lucide-react";
 import { Modal } from "../../components/modal";
 import { Button } from "../../components/button";
+import { api } from "../../lib/axios";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { Loading } from "../../components/loading";
 
 interface CreateActivityModalProps {
   closeCreateActivityModal: () => void;
@@ -9,6 +13,28 @@ interface CreateActivityModalProps {
 export function CreateActivityModal({
   closeCreateActivityModal,
 }: CreateActivityModalProps) {
+  const { tripId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function createActivity(event: React.FormEvent<HTMLFormElement>) {
+    setIsLoading(true);
+
+    event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+
+    const title = data.get("title")?.toString();
+    const occurs_at = data.get("occurs-at")?.toString();
+
+    await api.post(`/trips/${tripId}/activities`, { title, occurs_at });
+
+    setIsLoading(false);
+
+    window.location.reload();
+
+    closeCreateActivityModal();
+  }
+
   return (
     <Modal.Root onClose={closeCreateActivityModal}>
       <Modal.Content>
@@ -17,7 +43,7 @@ export function CreateActivityModal({
           Todos os convidados podem visualizar as atividades.
         </p>
 
-        <form className="space-y-3">
+        <form onSubmit={createActivity} className="space-y-3">
           <div className="h-14 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
             <Tag className="size-4 text-zinc-400 ml-2" />
             <input
@@ -38,7 +64,7 @@ export function CreateActivityModal({
           </div>
 
           <Button type="submit" size="full">
-            Salvar atividade
+            {isLoading ? <Loading /> : "Salvar Atividade"}
           </Button>
         </form>
       </Modal.Content>
