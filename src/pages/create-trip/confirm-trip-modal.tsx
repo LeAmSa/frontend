@@ -2,15 +2,22 @@ import { Mail, User } from "lucide-react";
 import { FormEvent } from "react";
 import { Modal } from "../../components/modal";
 import { Button } from "../../components/button";
+import { Loading } from "../../components/loading";
 
 interface ConfirmTripModalProps {
   closeConfirmTripModal: () => void;
   onCreateTrip: (event: FormEvent<HTMLFormElement>) => void;
+  setOwnerName: (name: string) => void;
+  setOwnerEmail: (email: string) => void;
+  isLoading: boolean;
 }
 
 export function ConfirmTripModal({
   closeConfirmTripModal,
   onCreateTrip,
+  setOwnerName,
+  setOwnerEmail,
+  isLoading,
 }: ConfirmTripModalProps) {
   return (
     <Modal.Root onClose={closeConfirmTripModal}>
@@ -33,6 +40,7 @@ export function ConfirmTripModal({
               name="name"
               placeholder="Seu nome completo"
               className="bg-transparent text-lg placeholder-zinc-400 w-20 outline-none flex-1"
+              onChange={(event) => setOwnerName(event.target.value)}
             />
           </div>
 
@@ -43,11 +51,12 @@ export function ConfirmTripModal({
               name="email"
               placeholder="Seu e-mail pessoal"
               className="bg-transparent text-lg placeholder-zinc-400 w-20 outline-none flex-1"
+              onChange={(event) => setOwnerEmail(event.target.value)}
             />
           </div>
 
           <Button type="submit" size="full">
-            Confirmar criação da viagem
+            {!isLoading ? "Confirmar criação da viagem" : <Loading />}
           </Button>
         </form>
       </Modal.Content>
