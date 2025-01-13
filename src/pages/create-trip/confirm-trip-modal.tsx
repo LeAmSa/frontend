@@ -3,8 +3,12 @@ import { FormEvent } from "react";
 import { Modal } from "../../components/modal";
 import { Button } from "../../components/button";
 import { Loading } from "../../components/loading";
+import { DateRange } from "react-day-picker";
+import { format } from "date-fns";
 
 interface ConfirmTripModalProps {
+  destination: string;
+  eventStartAndEndDates: DateRange | undefined;
   closeConfirmTripModal: () => void;
   onCreateTrip: (event: FormEvent<HTMLFormElement>) => void;
   setOwnerName: (name: string) => void;
@@ -13,6 +17,8 @@ interface ConfirmTripModalProps {
 }
 
 export function ConfirmTripModal({
+  destination,
+  eventStartAndEndDates,
   closeConfirmTripModal,
   onCreateTrip,
   setOwnerName,
@@ -25,12 +31,16 @@ export function ConfirmTripModal({
         <Modal.Title text="Confirmar criação da viagem" />
         <p className="text-zinc-400">
           Para concluir a criação da viagem para{" "}
-          <span className="font-semibold text-zinc-100">Florianópolis</span>,
-          Brasil nas datas de{" "}
+          <span className="font-semibold text-zinc-100">{destination}</span>,
+          nas datas de{" "}
           <span className="font-semibold text-zinc-100">
-            16 a 27 de Agosto de 2024
-          </span>{" "}
-          preencha seus dados abaixo:
+            {eventStartAndEndDates?.from && eventStartAndEndDates.to
+              ? format(eventStartAndEndDates.from, "d' de 'LLL")
+                  .concat(" até ")
+                  .concat(format(eventStartAndEndDates.to, "d' de 'LLL"))
+              : null}
+          </span>
+          , preencha seus dados abaixo:
         </p>
 
         <form onSubmit={onCreateTrip} className="space-y-3">
