@@ -108,6 +108,8 @@ export function CreateTripPage() {
     setIsLoading(false);
   }
 
+  console.log(eventStartAndEndDates);
+
   return (
     <div className="h-screen flex items-center justify-center bg-pattern bg-no-repeat bg-center">
       <div className="max-w-3xl w-full px-6 text-center space-y-10">
@@ -162,6 +164,8 @@ export function CreateTripPage() {
 
       {isConfirmTripModalOpen && (
         <ConfirmTripModal
+          destination={destination}
+          eventStartAndEndDates={eventStartAndEndDates}
           closeConfirmTripModal={closeConfirmTripModal}
           onCreateTrip={handleCreateTrip}
           setOwnerName={setOwnerName}
